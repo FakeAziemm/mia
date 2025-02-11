@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How dare u ignore me.</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            transition: background-color 0.5s ease;
+        }
+        #firstPage {
+            background-color: lightblue;
+        }
+        #secondPage {
+            background-color: yellow;
+        }
+        .button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+        .red-background {
+            background-color: red !important;
+        }
+        .hidden {
+            display: none;
+        }
+        .mia-button {
+            background-color: #f44336;
+        }
+        img {
+            max-width: 400px;
+            margin-top: 20px;
+        }
+        #countdown {
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="firstPage">
+        <h1>How dare u ignore me.</h1>
+        <button class="button" id="sorryBtn">I'm sorry</button>
+        <button class="button" id="idcBtn">Lol idc</button>
+    </div>
+
+    <div id="secondPage" class="hidden">
+        <h1>Find the "I'm sorry" button, then I forgive you</h1>
+        <p id="countdown">Time left: 30</p>
+        <div id="miaButtons">
+            <!-- A bunch of "I'm mia" buttons will be inserted here -->
+        </div>
+        <button class="button" id="sorryBtn2">I'm sorry</button> <!-- Added "I'm sorry" button here -->
+    </div>
+
+    <div id="thirdPage" class="hidden">
+        <h1>Congrats, I forgive u <3</h1>
+        <img src="https://placekitten.com/400/400" alt="Cute cat with rose">
+    </div>
+
+    <script>
+        const firstPage = document.getElementById("firstPage");
+        const secondPage = document.getElementById("secondPage");
+        const thirdPage = document.getElementById("thirdPage");
+        const miaButtonsContainer = document.getElementById("miaButtons");
+        const sorryBtn = document.getElementById("sorryBtn");
+        const idcBtn = document.getElementById("idcBtn");
+        const sorryBtn2 = document.getElementById("sorryBtn2");
+        const countdownDisplay = document.getElementById("countdown");
+
+        let countdownTimer;
+
+        // Handle "I'm sorry" on the first page
+        sorryBtn.addEventListener("click", () => {
+            firstPage.classList.add("hidden");
+            secondPage.classList.remove("hidden");
+            createMiaButtons();
+            startCountdown();
+        });
+
+        // Handle "Lol idc" on the first page
+        idcBtn.addEventListener("click", () => {
+            document.body.classList.add("red-background");
+            firstPage.innerHTML = "<h1>K do what u want >:(</h1>";
+        });
+
+        // Handle "I'm sorry" on the second page
+        sorryBtn2.addEventListener("click", () => {
+            secondPage.classList.add("hidden");
+            thirdPage.classList.remove("hidden");
+            clearInterval(countdownTimer); // Stop countdown once it's clicked
+        });
+
+        // Function to create more "I'm mia" buttons
+        function createMiaButtons() {
+            for (let i = 0; i < 30; i++) {  // Increased the number of buttons to 30
+                const miaButton = document.createElement("button");
+                miaButton.classList.add("button", "mia-button");
+                miaButton.innerText = "I'm mia";
+                miaButton.addEventListener("click", miaButtonClicked);
+                miaButtonsContainer.appendChild(miaButton);
+            }
+        }
+
+        // Mia button click handler
+        function miaButtonClicked() {
+            alert("Shut up, I know you're now find the button.");
+        }
+
+        // Countdown function
+        let timeLeft = 30;
+        function startCountdown() {
+            countdownTimer = setInterval(() => {
+                if (timeLeft <= 0) {
+                    clearInterval(countdownTimer);
+                    countdownDisplay.innerText = "Time's up!";
+                    alert("Time's up! Find the button quickly!");
+                } else {
+                    countdownDisplay.innerText = "Time left: " + timeLeft;
+                    timeLeft--;
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
+
